@@ -3,10 +3,11 @@ from django.utils import timezone
 from datetime import datetime
 from todo.models import Task
 
-# Create your tests here.
+
 class SampleTestCase(TestCase):
     def test_sample(self):
         self.assertEqual(1 + 2, 3)
+
 
 class TaskModelTestCase(TestCase):
     def test_create_task1(self):
@@ -53,7 +54,7 @@ class TodoViewTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.templates[0].name, 'todo/index.html')
-        self.assertEqual(len(response.context['tasks']),1)
+        self.assertEqual(len(response.context['tasks']), 1)
 
     def test_index_get_order_post(self):
         task1 = Task(title='task1', due_at=timezone.make_aware(datetime(2024, 7, 1)))
@@ -67,6 +68,7 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(response.templates[0].name, 'todo/index.html')
         self.assertEqual(response.context['tasks'][0].title, 'task2')
         self.assertEqual(response.context['tasks'][1].title, 'task1')
+
     def test_index_get_order_due(self):
         task1 = Task(title='task1', due_at=timezone.make_aware(datetime(2024, 7, 1)))
         task1.save()
